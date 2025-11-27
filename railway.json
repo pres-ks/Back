@@ -1,9 +1,10 @@
 {
-	"build": {
-		"builder": "NIXPACKS"
-	},
-	"deploy": {
-		"startCommand": "dotnet ConsumoAPI2.Api.dll",
-		"restartPolicyType": "ON_FAILURE"
-	}
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "dotnet restore && dotnet publish -c Release -o output"
+  },
+  "deploy": {
+    "startCommand": "dotnet output/ConsumoAPI2.Api.dll",
+    "restartPolicyType": "ON_FAILURE"
+  }
 }
