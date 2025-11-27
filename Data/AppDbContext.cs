@@ -9,6 +9,8 @@ namespace ConsumoAPI2.Api.Data
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<DogFavorite> DogFavorites { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
