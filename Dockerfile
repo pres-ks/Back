@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copia el archivo del proyecto y restaura las dependencias
-COPY ["ConsumoAPI2.Api.csproj", "."]
-RUN dotnet restore "ConsumoAPI2.Api.csproj"
+COPY ["ConsumoAPI2.Api.csproj", "./"]
+RUN dotnet restore "./ConsumoAPI2.Api.csproj"
 
 # Copia el resto de los archivos y construye
 COPY . .
@@ -12,10 +12,9 @@ RUN dotnet build "ConsumoAPI2.Api.csproj" -c Release -o /app/build
 
 # Publica la aplicación
 FROM build AS publish
-RUN dotnet publish "ConsumoAPI2.Api.csproj" -c Release -o /app/publish
+WORKDIR /src
+RUN dotnet publish "ConsumoAPI2.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-
-#cambio para prender
 # Imagen final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
